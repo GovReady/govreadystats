@@ -1,8 +1,25 @@
-# vm
+# Composer
+# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
+composer.phar
+# vendor/
+
+# Emacs
+\#*#
+*~
+
+# Apple
+.DS_Store
+
+# Vagrant
+.vagrant/
 .vagrant/**
 *.iso
 iso/**
 *.box
 
-# Mac
-.DS_Store
+
+# credentials and sensitive files
+credentials.inc.php
+
+# test note
+
