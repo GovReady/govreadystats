@@ -135,7 +135,7 @@ $sms = $client->account->sms_messages->create(
 $sid = $sms->sid;
 $response = <<<XML
 <Response>
-    <Message>$sid<Message>
+    <Message>$sid</Message>
 </Response>
 XML;
 
