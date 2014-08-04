@@ -110,7 +110,6 @@ HTML;
 // End Redirect example
 //
 
-
 //
 // Twilio test
 // Click this link to send test text message via Twilio. Tests message sending function
@@ -194,6 +193,29 @@ XML;
 	TempLogger("Response: Status: OK");
 	return $app->response->setBody($response);
 	
+});
+
+// govready.io/io - Log download og govready
+//-------------------------------------------
+$app->get('/io/', function () use ($app) {
+
+	// prepare log entry
+	$ts = $_SERVER['REQUEST_TIME'];
+	$entry = "$ts\t field2\t field3\n";
+
+	// log entry 
+	// /var/local/govreadystats/govreadystats.log
+	file_put_contents("/var/local/govreadystats/govreadystats.log", $entry, FILE_APPEND);
+
+	// Prepare a simple response
+	$response = array('status' => "OK", 'message' => "io.govready.org/io", 'entry' => $entry);
+
+	// Send json header
+	header('Content-Type: application/json');
+
+	// Send json encoded reponse
+	echo json_encode($response);
+
 });
 
 $app->run();

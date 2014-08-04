@@ -1,4 +1,7 @@
 <?php
+#
+# Usage: http://localhost:8083/tests/unit_tests/test_basic.php
+#
 require_once('../simpletest/autorun.php');
 require_once('utilities.php');
 
@@ -28,6 +31,13 @@ class TestSlimBasic extends UnitTestCase {
 		$page = file_get_contents($url);
 		$this->assertTrue($expected == $page);
 
+	}
+
+	function testGovReadyStatsIo() {
+		$url = 'http://localhost/io/';
+		$expected = "Hello, test!\n";
+		$page = file_get_contents($url);
+		$this->assertTrue($expected == $page);
 	}
 
 
