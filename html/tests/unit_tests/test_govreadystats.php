@@ -30,5 +30,14 @@ class TestSlimBasic extends UnitTestCase {
 
 	}
 
+	function testGovReadyStatsIo() {
+		$url = 'http://localhost/io/';
+		$expected = '/"status":"OK",/';
+		$page = file_get_contents($url);
+		echo "TestGovReadyStatsIo \$page: $page";
+		$this->assertPattern($expected, $page);	
+	}
+
+
 }
 ?>
