@@ -195,8 +195,8 @@ XML;
 	
 });
 
-// govready.io/io - Log download og govready
-//-------------------------------------------
+// govready.io/io - Log any install (e.g. download) of govready
+//-------------------------------------------------------------
 $app->get('/io/', function () use ($app) {
 
 	// prepare log entry
