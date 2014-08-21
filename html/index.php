@@ -196,6 +196,47 @@ XML;
 	
 });
 
+// govready.io/io - Log download og govready
+//-------------------------------------------
+$app->get('/io/', function () use ($app) {
+
+	// prepare log entry
+	date_default_timezone_set('UTC');
+	$requested    = date(DATE_RFC2822, $_SERVER['REQUEST_TIME']); 
+	$ip_address   = $_SERVER['REMOTE_ADDR'];
+	$user_agent   = $_SERVER['HTTP_USER_AGENT'];
+	$event        = "install";
+	$target 	  = "https://raw.githubusercontent.com/GovReady/govready/master/install.sh";
+	
+	$entry = "$requested\t$ip_address\t$user_agent\t$event\t$target\n";
+
+	// log entry 
+	// /var/local/govreadystats/govreadystats.log
+	file_put_contents("/var/local/govreadystats/govreadystats.log", $entry, FILE_APPEND | LOCK_EX);
+
+	// Prepare a simple response
+	$response = array('status' => "OK", 'message' => "io.govready.org/io", 'entry' => $entry);
+
+	// Send json header
+	header('Content-Type: application/json');
+
+	// Send json encoded reponse
+	echo json_encode($response);
+
+	// send text to Greg
+	// set your AccountSid and AuthToken from www.twilio.com/user/account
+	$AccountSid = ACCOUNTSID;
+	$AuthToken = AUTHTOKEN;
+	$client = new Services_Twilio($AccountSid, $AuthToken);
+	$sms = $client->account->sms_messages->create(
+    	"860-245-2269", // From this number
+    	"917-304-3488", // To this number
+    	"GovReady installed.\n $ip_address, $user_agent"
+	);
+	$sid = $sms->sid;
+	
+});
+
 $app->run();
 
 ?>
