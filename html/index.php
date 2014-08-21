@@ -236,6 +236,16 @@ $app->get('/io/', function () use ($app) {
 	
 });
 
+// govready.io/install - Redirect to Github.com/GovReady/govready repo install 
+//-----------------------------------------------------------------------------
+$app->get('/install', function () use ($app) {
+
+	// Redirect url to get content from govready repo on github
+	$app->response()->status(302);
+	$app->response()->header('Location', 'https://raw.githubusercontent.com/GovReady/govready/master/install.sh');
+
+});
+
 $app->run();
 
 ?>
