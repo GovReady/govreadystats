@@ -110,7 +110,6 @@ HTML;
 // End Redirect example
 //
 
-
 //
 // Twilio test
 // Click this link to send test text message via Twilio. Tests message sending function
@@ -207,7 +206,7 @@ $app->get('/io/', function () use ($app) {
 	$user_agent   = $_SERVER['HTTP_USER_AGENT'];
 	$event        = "install";
 	$target 	  = "https://raw.githubusercontent.com/GovReady/govready/master/install.sh";
-	
+
 	$entry = "$requested\t$ip_address\t$user_agent\t$event\t$target\n";
 
 	// log entry 

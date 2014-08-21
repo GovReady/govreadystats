@@ -38,6 +38,5 @@ class TestSlimBasic extends UnitTestCase {
 		$this->assertPattern($expected, $page);	
 	}
 
-
 }
 ?>
