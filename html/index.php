@@ -205,9 +205,10 @@ $app->get('/io/', function () use ($app) {
 	$ip_address   = $_SERVER['REMOTE_ADDR'];
 	$user_agent   = $_SERVER['HTTP_USER_AGENT'];
 	$event        = "install";
-	$target 	  = "https://raw.githubusercontent.com/GovReady/govready/master/install.sh";
+	$target       = "https://raw.githubusercontent.com/GovReady/govready/master/install.sh";
+	$domain_name  = gethostbyaddr($ip_address);
 
-	$entry = "$requested\t$ip_address\t$user_agent\t$event\t$target\n";
+	$entry = "$requested\t$ip_address\t$domain_name\t$user_agent\t$event\t$target\n";
 
 	// log entry 
 	// /var/local/govreadystats/govreadystats.log
@@ -230,7 +231,7 @@ $app->get('/io/', function () use ($app) {
 	$sms = $client->account->sms_messages->create(
     	"860-245-2269", // From this number
     	"917-304-3488", // To this number
-    	"GovReady installed.\n $ip_address, $user_agent"
+    	"GovReady $event.\n $ip_address, $domain_name, $user_agent"
 	);
 	$sid = $sms->sid;
 	
