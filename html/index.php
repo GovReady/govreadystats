@@ -228,10 +228,11 @@ $app->get('/io/', function () use ($app) {
 	$AccountSid = ACCOUNTSID;
 	$AuthToken = AUTHTOKEN;
 	$client = new Services_Twilio($AccountSid, $AuthToken);
-	$sms = $client->account->sms_messages->create(
+	$msg =  substr("GovReady $event.\n $ip_address, $domain_name, $user_agent", 0, 140);
+    $sms = $client->account->sms_messages->create(
     	"860-245-2269", // From this number
     	"917-304-3488", // To this number
-    	"GovReady $event.\n $ip_address, $domain_name, $user_agent"
+    	$msg
 	);
 	$sid = $sms->sid;
 	
